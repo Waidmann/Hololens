@@ -1,0 +1,8 @@
+<!DOCTYPE RestReturn
+  [
+  <!ELEMENT RestReturn (title,device,location,body)>
+  <!ELEMENT title (#PCDATA)>
+  <!ELEMENT device (#PCDATA)>
+  <!ELEMENT location (#PCDATA)>
+  <!ELEMENT body (#PCDATA)>
+  ]>

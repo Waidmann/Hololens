@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE RestReturn "XMLDefinition.dtd">
+<RestReturn>
+    <title>"Switch"</title>
+    <device>"Cisco Catalyst 2960"</device>
+    <location>"C4.07"</location>
+    <body>"The Cisco Catalyst 2960 Series offers layer 2 Ethernet switches to provide enhanced LAN services at branch or remote offices."</body>
+</RestReturn>
