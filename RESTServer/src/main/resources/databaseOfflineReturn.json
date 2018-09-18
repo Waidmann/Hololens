@@ -1,0 +1,8 @@
+{
+    "RESTReturn": {
+        "title" : "DB offline",
+        "properties" : [ "Please re/start DB",
+        "null",
+        ""]
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "RESTReturn": {
+        "title" : "Not found",
+        "properties" : [ "Wrong scan or not in DB",
+        "null",
+        ""]
+    }
+}
