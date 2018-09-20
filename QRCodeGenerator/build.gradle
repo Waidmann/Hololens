@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'at.spengergasse.hololens'
+version '1.0'
+
+sourceCompatibility = 1.10
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.google.zxing', name: 'core', version: '3.3.3'
+    compile group: 'com.google.zxing', name: 'javase', version: '3.3.3'
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+
+}
