@@ -49,7 +49,7 @@ public class QREntry {
         return title;
     }
 
-    public BufferedImage getQR(){
-        return AppUtils.generateQRCodeImage(key);
+    public BufferedImage getQR(int size){
+        return AppUtils.generateQRCodeImage(key, size);
     }
 }

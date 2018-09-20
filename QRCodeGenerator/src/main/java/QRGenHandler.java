@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.embed.swing.SwingFXUtils;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class QRGenHandler implements Initializable {
@@ -64,17 +65,22 @@ public class QRGenHandler implements Initializable {
     }
 
     public void deletePopUp(){
-
+        ArrayList<QREntry> entries = new ArrayList<QREntry>(qrListView.getSelectionModel().getSelectedItems());
+        entries.forEach(e->{
+            AppUtils.jedisServer.del(e.key);
+            qrListView.getItems().remove(e);
+        });
     }
 
     public void printPopup(){
-
+        AppUtils.printCodes(new ArrayList<QREntry>(qrListView.getSelectionModel().getSelectedItems()));
     }
+
 
     public void selectEntry(QREntry entry){
         titleField.setText(entry.title);
         propertiesTextArea.setText(entry.properties);
         qrCodeID.setText(entry.key);
-        qrCodeViewer.setImage(SwingFXUtils.toFXImage(AppUtils.generateQRCodeImage(entry.key), null));
+        qrCodeViewer.setImage(SwingFXUtils.toFXImage(AppUtils.generateQRCodeImage(entry.key, 100), null));
     }
 }

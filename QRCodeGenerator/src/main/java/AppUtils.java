@@ -3,10 +3,16 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import javafx.scene.control.ChoiceDialog;
 import redis.clients.jedis.Jedis;
 
+import javax.print.PrintService;
 import java.awt.*;
 import java.awt.image.*;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -50,11 +56,10 @@ public class AppUtils {
     }
 
 
-    public static BufferedImage generateQRCodeImage(String text){
+    public static BufferedImage generateQRCodeImage(String text, int size){
         try {
-            int width = 150;
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, width);
+            BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, size, size);
             return MatrixToImageWriter.toBufferedImage(bitMatrix);
         }catch(Exception e) {
             e.printStackTrace();
@@ -83,5 +88,50 @@ public class AppUtils {
 
     public static String decode64(String in){
         return new String(decoder.decode(in.getBytes()));
+    }
+
+
+    public static void printCodes(ArrayList<QREntry> entries) {
+
+        ChoiceDialog<PrintService> dialog = new ChoiceDialog<PrintService>(PrinterJob.lookupPrintServices()[0], PrinterJob.lookupPrintServices());
+        dialog.setHeaderText("Choose the printer!");
+        dialog.setContentText("Choose a printer from available printers");
+        dialog.setTitle("Printer Choice");
+        Optional<PrintService> opt = dialog.showAndWait();
+        if (opt.isPresent()) {
+            confirmPrint(opt.get(), entries);
+        }
+    }
+
+    private static void confirmPrint(PrintService ps, ArrayList<QREntry> entries){
+
+        PrinterJob printJob = PrinterJob.getPrinterJob();
+        printJob.setPrintable(new Printable() {
+            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                if (pageIndex != 0) {
+                    return NO_SUCH_PAGE;
+                }
+
+                for(int i = 0; i<entries.size();i++){
+
+                    int index = i +1;
+
+                    BufferedImage image = entries.get(i).getQR(200);
+
+                    int y = index%2 *100 + index * 100 - 100;
+                    int x = index%2 * 200 + 100;
+
+                    graphics.drawImage(image, x, y, 100, 100, null);
+                }
+                //graphics.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
+                return PAGE_EXISTS;
+            }
+        });
+        try {
+            printJob.setPrintService(ps);
+            printJob.print();
+        } catch (PrinterException e1) {
+            e1.printStackTrace();
+        }
     }
 }
