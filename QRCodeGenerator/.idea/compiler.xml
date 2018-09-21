@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="QRCodeGenerator_main" options="--add-modules=javafx.graphics,javafx.fxml,javafx.controls,javafx.swing" />
+      <module name="QRCodeGenerator_main" options="--add-modules=javafx.graphics,javafx.fxml,javafx.controls,javafx.swing,javafx.base" />
     </option>
   </component>
 </project>

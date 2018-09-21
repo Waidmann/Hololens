@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class StartApplication extends Application {
@@ -17,7 +18,8 @@ public class StartApplication extends Application {
 
         Scene scene = new Scene(root, 600, 360);
 
-        stage.setTitle("FXML Welcome");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
+        stage.setTitle("QR Creator GUI");
         stage.setScene(scene);
         stage.show();
     }
