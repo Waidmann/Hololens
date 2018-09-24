@@ -24,7 +24,7 @@ public class QRGenHandler implements Initializable {
     @FXML
     public ImageView qrCodeViewer;
     @FXML
-    public Label qrCodeID;
+    public TextField qrCodeID;
     @FXML
     public ListView<QREntry> qrListView;
     @FXML
@@ -39,9 +39,11 @@ public class QRGenHandler implements Initializable {
         qrListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         qrListView.getItems().addAll(AppUtils.getAllEntries());
 
+        qrCodeID.setEditable(false);
+
         qrCodeEnlarged = new ImageView();
         qrCodeEnlarged.setTranslateX(-125);
-        qrCodeEnlarged.setTranslateY(-6);
+        qrCodeEnlarged.setTranslateY(-15);
 
         topLevelPane.getChildren().add(qrCodeEnlarged);
         qrCodeEnlarged.toBack();

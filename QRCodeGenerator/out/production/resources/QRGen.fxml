@@ -51,11 +51,11 @@
                                 <Insets right="10.0" top="10.0" />
                             </VBox.margin>
                         </ImageView>
-                        <Label fx:id="qrCodeID" disable="true" text="ID: ">
+                        <TextField fx:id="qrCodeID" text="ID: ">
                            <font>
                               <Font size="14.0" />
                            </font>
-                        </Label>
+                        </TextField>
                      </children>
                   </VBox>
                </children>
